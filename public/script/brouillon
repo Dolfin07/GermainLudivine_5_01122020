@@ -1,0 +1,46 @@
+
+// Validation du formulaire
+/*const validForm = () => {
+  // Validation formulaire
+  const inputNom = document.getElementById("nom");
+  const inputPrenom = document.getElementById("prenom");
+  const inputAdresse = document.getElementById("adresse");
+  const inputVille = document.getElementById("ville");
+  const inputMail = document.getElementById("mail");
+  const missNom = document.getElementById("missNom");
+  const missPrenom = document.getElementById("missPrenom");
+  const missAdresse = document.getElementById("missAdresse");
+  const missVille = document.getElementById("missVille");
+  const missMail = document.getElementById("missMail");
+  // Validation des 5 input not empty
+  validNotEmpty(inputNom, missNom);
+  validNotEmpty(inputPrenom, missPrenom);
+  validNotEmpty(inputAdresse, missAdresse);
+  validNotEmpty(inputVille, missVille);
+  validNotEmpty(inputMail, missMail);
+  // Validation adresse email
+  validMail(inputMail, missMail);
+};*/
+
+/*if (form.checkValidity() == false) {
+    console.log("stop");
+    event.preventDefault();
+    event.stopPropagation();
+  }*/
+  // alert("form ok");
+
+  
+// Validation form
+/*const validNotEmpty = (element, missInput) => {
+  if (element.validity.valueMissing) {
+    missInput.textContent = "Champ manquant";
+    missInput.style.color = "red";
+  }
+};
+
+const validMail = (element, missInput) => {
+  if (!element.validity.patternMismatch) {
+    missInput.textContent = "Format mail incorrect";
+    missInput.style.color = "red";
+  }
+}; */

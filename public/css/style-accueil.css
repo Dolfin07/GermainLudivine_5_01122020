@@ -1,0 +1,33 @@
+#main .card {
+    width: 31%;
+    margin: .8rem;
+    box-shadow: 10px 5px 5px slategray;
+}
+
+.price {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px slategray;
+    width: 19%;
+}
+
+/* TABLET */
+@media all and (max-width: 1130px) {
+   
+    #main .card {
+        width: 45%;
+        margin: .8rem;
+    }
+
+}
+
+/* MOBILE */
+@media all and (max-width: 767px) {
+    #container {
+        display: block;
+    }
+    #main .card {
+        margin-bottom: 1rem;
+        width: 94%;
+    }
+}
