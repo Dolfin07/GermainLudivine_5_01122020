@@ -32,7 +32,7 @@ const generateCardProduct = (response) => {
 };
 
 // Remplissage ou mise à jour du LocalStorage
-const fillLocalStorage = (resp) => {
+const fillLocalStorage = (resp, idProduct) => {
   const quantity = document.getElementById("quantity").value;
   const newAddBasket = {
     id: idProduct,
@@ -65,13 +65,12 @@ const fillLocalStorage = (resp) => {
   localStorage.setItem("basketContent", JSON.stringify(basket));
 };
 
-// récupération de l'id ds url
-const search = location.search;
-const searchSplit = search.split("=");
-const idProduct = searchSplit[1];
-
 // Requête
 const resp = () => {
+  // récupération de l'id ds url
+  const search = location.search;
+  const searchSplit = search.split("=");
+  const idProduct = searchSplit[1];
   fetch("http://localhost:3000/api/teddies/" + idProduct)
     .then((response) => response.json())
     .then((response) => {
@@ -79,7 +78,9 @@ const resp = () => {
       generateCardProduct(response);
       //// Stockage des info dans localStorage
       const button = document.getElementById("btn");
-      button.addEventListener("click", () => fillLocalStorage(response));
+      button.addEventListener("click", () =>
+        fillLocalStorage(response, idProduct)
+      );
     })
     .catch((err) => console.log("err"));
 };

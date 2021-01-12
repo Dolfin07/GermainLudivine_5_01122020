@@ -74,7 +74,7 @@ const createBasket = (localstorage) => {
 // Remplissage panier
 const modifyBasket = () => {
   //// Si localStorage est vide
-  if (localStorage.length == 0) {
+  if (localStorage.length === 0) {
     emptyBasket();
   } else {
     //// Si localStorage contient des éléments
@@ -87,6 +87,48 @@ const modifyBasket = () => {
     localStorage.clear();
     location.reload();
   });
+};
+
+// Validation du formulaire
+const validation = (e) => {
+  e.preventDefault();
+  let erreur;
+  let inputs = document.forms["form"];
+  const rgxMail = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}.[a-z]{2,4}/;
+  const rgxIdentite = /^[a-zA-Zàäâçéèëêïîôöùû\- ']{2,}$/;
+  const rgxAdresse = /^[a-zA-Zàäâçéèëêïîôöùû0-9- ']{2,}$/;
+
+  ////Validation adresse mail
+  if (!rgxMail.test(inputs["mail"].value)) {
+    erreur = "Adresse email incorrecte";
+  }
+  ////Validation nom et prénom
+  if (
+    !rgxIdentite.test(inputs["prenom"].value) ||
+    !rgxIdentite.test(inputs["nom"].value)
+  ) {
+    erreur =
+      "Les noms et prénoms ne doivent contenir que des lettres en majuscule ou minuscules(minimum 2 lettres), des espaces et des tirets.";
+  }
+  ////Validation adresse et ville
+  if (
+    !rgxAdresse.test(inputs["adresse"].value) ||
+    !rgxAdresse.test(inputs["ville"].value)
+  ) {
+    erreur =
+      "L'adresse et la ville ne doivent contenir que des chiffres, espaces, tirets  ou des lettres en majuscule ou minuscules";
+  }
+  for (let i = 0; i < inputs.length; i++) {
+    //// Validation champ requis
+    if (!inputs[i].value) {
+      erreur = "Veuillez renseigner tous les champs";
+    }
+    //// Validation nombre de caractères max
+    if (inputs[i].value.length > 150) {
+      erreur = "Veuillez ne pas dépasser 150 caractères";
+    }
+    return erreur;
+  }
 };
 
 // Création objet à envoyer
@@ -142,44 +184,7 @@ modifyBasket();
 
 const valid = document.getElementById("form");
 valid.addEventListener("submit", (e) => {
-  e.preventDefault();
-  let erreur;
-  let inputs = document.forms["form"];
-  let rgxMail = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}.[a-z]{2,4}/;
-  let rgxIdentite = /^[a-zA-Z- ']{2,}$/;
-  let rgxAdresse = /^[a-zA-Z0-9- ']{2,}$/;
-
-  ////Validation adresse mail
-  if (!rgxMail.test(inputs["mail"].value)) {
-    erreur = "Adresse email incorrecte";
-  }
-  ////Validation nom et prénom
-  if (
-    !rgxIdentite.test(inputs["prenom"].value) ||
-    !rgxIdentite.test(inputs["nom"].value)
-  ) {
-    erreur =
-      "Les noms et prénoms ne doivent contenir que des lettres en majuscule ou minuscules(minimum 2 lettres), des espaces et des tirets.";
-  }
-  ////Validation adresse et ville
-  if (
-    !rgxAdresse.test(inputs["adresse"].value) ||
-    !rgxAdresse.test(inputs["ville"].value)
-  ) {
-    erreur =
-      "L'adresse et la ville ne doivent contenir que des chiffres, espaces, tirets  ou des lettres en majuscule ou minuscules";
-  }
-  for (let i = 0; i < inputs.length; i++) {
-    //// Validation champ requis
-    if (!inputs[i].value) {
-      erreur = "Veuillez renseigner tous les champs";
-    }
-    //// Validation nombre de caractères max
-    if (inputs[i].value.length > 150) {
-      erreur = "Veuillez ne pas dépasser 150 caractères";
-    }
-  }
-
+  const erreur = validation(e);
   if (erreur) {
     document.getElementById("erreur").innerHTML = erreur;
   } else {
