@@ -3,8 +3,10 @@
     border-radius: 15px;
     border-color: #f3e9f1;
     font-size: small;
+    color: #fff;
 }
 
-#emptyBasket:hover, #validBasket:hover .supprimer:hover{
+#emptyBasket:hover, #validBasket:hover, .supprimer:hover {
     color: #000;
+    background: #905cfa;
 }
